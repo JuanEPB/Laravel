@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('venta', function (Blueprint $table) {
+        Schema::create('product', function (Blueprint $table) {
             $table->id();
+            $table->string('tipo');
             $table->integer('cantidad');
+            $table->text('sabor');
+            $table->integer('costo');
             $table->timestamps();
-            $table->unsignedBigInteger('producto_id');
-            $table->foreign('producto_id')->references('id')->on('posts')->onDelete('cascade');
-        });    }
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('venta');
+        Schema::dropIfExists('product');
     }
 };
