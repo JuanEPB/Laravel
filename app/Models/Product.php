@@ -16,7 +16,7 @@ class Product extends Model
     protected $primaryKey = 'id';
 
     #hace referencia a created_at y updated_at
-    public $timestamps = true;
+    public $timestamps = false;
 
     #especificacion de la columnas dentro de la tabla
     protected $fillable = [

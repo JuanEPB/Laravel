@@ -13,7 +13,7 @@ class ProductsController extends Controller
     public function index()
     {
     $products =Pro::paginate(5);
-    dd($products);
+    //dd($products);
 
     return view('products.index', compact('products'));
     }
@@ -72,26 +72,41 @@ class ProductsController extends Controller
     {
         $pro = Pro::find($id);//select * from products where
         $p = Pro:: where ('id', $id)->get();
-        dump($pro);
-        dd($p);
+        //dump($pro);
+        //dd($p);
         return view('products.update',compact('pro'));
-        dd("entra a edit $id");
+        //dd("entra a edit $id");
     }
 
     /**
      * Update the specified resource in storage.
+     * @param int $id
      */
-    public function update(Request $request, string $id)
+
+    public function update(Request $request, $id)
     {
-        dd($request->all());
+        //dd($request->all());
+        $pro = Pro::find($id);
+        $pro->save();
+        $pro->name = $request->name;
+        $pro->description =  $request->description;
+        $pro->price = $request->price;
+        $pro->stock = $request->stock;
+
+        $pro->save();
+        $products =Pro::paginate(5);
+        return view('products.index', compact('products'));
+
     }
 
     /**
      * Remove the specified resource from storage.
+
      */
     public function destroy(string $id)
     {
-        //
+
+        dd("entra a destroy $id");
     }
 
     Function Prueba(){

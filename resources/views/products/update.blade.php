@@ -4,7 +4,7 @@
 <div class="container">
     <h2> Update Producto </h2>
 
-    {{ Form::open(['route' => 'products.update' ,'method' =>'POST']) }}
+    {{ Form::model($pro, ['route' => ['products.update', $pro->id], 'method' => 'POST']) }}
         <input type='hidden' value="{{$pro->id}}" name='id'>
         <div class="form-group">
             {{ Form::label('name_product', 'nombre del producto') }}

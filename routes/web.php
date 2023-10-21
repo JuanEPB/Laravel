@@ -19,9 +19,13 @@ Route::get('/', function () {
 });
 
 Route::get('products/list', [ProductsController::class, 'index'])->name('products.index');
-Route::get('products/create', [ProductsController::class, 'create'])->name('products.create');
+Route::get('product/create', [ProductsController::class, 'create'])->name('products.create');
 Route::post('products/guardar',[ProductsController::class, 'store'])->name('products.store');
-Route::post('products/update',[ProductsController::class, 'update'])->name('products.update');
-Route::get('/product/update', [ProductsController::class, 'update'])->name('products.update');
 
-Route::get('/product/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
+
+Route::post('products/{id}/update', [ProductsController::class, 'update'])->name('products.update');
+Route::get('/products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
+Route::get('/products/{id}/destroy', [ProductsController::class, 'destroy'])->name('products.destroy');
+
+
+http://127.0.0.1:8000/products/update
