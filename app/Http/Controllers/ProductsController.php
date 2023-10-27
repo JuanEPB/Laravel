@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product as Pro;
+Use Alert;
 
 class ProductsController extends Controller
 {
@@ -24,6 +25,7 @@ class ProductsController extends Controller
     public function create()
     {
         return view('products.create');
+
     }
 
     /**
@@ -34,13 +36,13 @@ class ProductsController extends Controller
 
         try {
             $validateData = $request->validate([
-                'name' => 'required|stringmax:50',
-                'description' => 'required|string|min:10|max:20',
-                'price' => 'required|numeric|min:0|max:250',
-                'stock' => 'required|numeric|min:0|max:250',
+                'name' =>  'required|string|max:50',
+                'description'  =>  'required|string|min:10|max:20',
+                'price'  =>  'required|numeric|min:0|max:250',
+                'stock'  => 'required|numeric|min:0|max:250',
             ]);
             Pro::create([
-                'name' => $request->nombre_producto,
+                'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
                 'stock' => $request->stock,
@@ -53,8 +55,9 @@ class ProductsController extends Controller
 
         }
 
+        Alert::success('Exito','El producto se creo con exito');
 
-        return redirect()->route('products.create');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -74,6 +77,7 @@ class ProductsController extends Controller
         $p = Pro:: where ('id', $id)->get();
         //dump($pro);
         //dd($p);
+        //Alert::success('Exito','El producto se actualizo con exito');
         return view('products.update',compact('pro'));
         //dd("entra a edit $id");
     }
@@ -94,8 +98,11 @@ class ProductsController extends Controller
         $pro->stock = $request->stock;
 
         $pro->save();
+
         $products =Pro::paginate(5);
+        Alert::success('Exito','El producto se actualizo con exito');
         return view('products.index', compact('products'));
+
 
     }
 
@@ -105,8 +112,12 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-
-        dd("entra a destroy $id");
+        $pro = Pro::find($id);
+        $pro->delete();
+        //dd("entra a destroy $id");
+        $products =Pro::paginate(5);
+        Alert::success('Exito','El producto se elimino con exito');
+        return view('products.index', compact('products'));
     }
 
     Function Prueba(){

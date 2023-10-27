@@ -4,30 +4,30 @@
                 {{Form::open(['route'=>'products.store','method' =>'POST']) }}
                 <div class="form-group">
                         {{ Form::label('name_product','nombre del producto') }}
-                        {{ Form::text('nombre_producto',null , ['class '=>'form-control']) }}
+                        {{ Form::text('name',null , ['class '=>'form-control']) }}
                         @error('name')
-                        <span class="text-danger">{{message}}</span>></span>
+                        <span class="text-danger">{{$message}}</span>></span>
                         @enderror
                 </div>
                 <div class="form-group">
                         {{ Form::label('description_product','Descripcion del producto') }}
                         {{ Form::textarea('description',null , ['class '=>'form-control']) }}
                         @error('description')
-                        <span class="text-danger">{{messages}}</span>></span>
+                        <span class="text-danger">{{$message}}</span>></span>
                         @enderror
                 </div>
                 <div class="form-group">
-                        {{ Form::label('price','precio del producto') }}
-                        {{!! Form::text('price', null, ['class '=>'form-control']) }}
-                        @error('price')
-                        <span class="text-danger">{{message}}</span>></span>
-                        @enderror
+                    {{ Form::label('price', 'Precio del producto') }}
+                    {{ Form::number('price', null, ['class' => 'form-control']) }}
+                    @error('price')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="form-group">
                         {{ Form::label('stock','Producto disponible') }}
                         {{ Form::number('stock', null, ['class '=>'form-control']) }}
                         @error('stock')
-                        <span class="text-danger">{{message}}</span>></span>
+                        <span class="text-danger">{{$message}}</span>></span>
                         @enderror
                 </div>
                 <div class="form-group">
