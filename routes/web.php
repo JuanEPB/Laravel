@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,8 @@ use App\Http\Controllers\ProductsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])->name('raiz');
+Route::get('products', [HomeController::class, 'home2'])->name('raiz');
 
 Route::get('products/list', [ProductsController::class, 'index'])->name('products.index');
 Route::get('product/create', [ProductsController::class, 'create'])->name('products.create');

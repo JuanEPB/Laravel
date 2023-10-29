@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->only('index');
     }
 
     /**
@@ -23,6 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products = Product::paginate(12);
+        return view('welcome');
+    }
+
+    public function home(){
+        $products = Product::paginate(5);
+        return view('welcome', compact('products'));
+    }
+    public function home2(request $request){
+        if($request->ajax()){
+            return view('paginate.pagination', compact('products'));
+        }
+        return view('paginate.products');
     }
 }
